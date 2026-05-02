@@ -13,12 +13,12 @@ function App() {
     <div className="min-h-screen overflow-x-hidden">
       <Navbar />
       <main>
-        {/* <Hero />
-        <About />
-        <Projects />
-        <Experience />
-        <Testimonials />
-        <Contact /> */}
+        <Hero />
+        {/* <About /> */}
+        {/* <Projects /> */}
+        {/* <Experience /> */}
+        {/* <Testimonials /> */}
+        {/* <Contact /> */}
       </main>
 
     </div>
