@@ -2,19 +2,32 @@ import { ArrowRight, ChevronDown, Download } from "lucide-react";
 import Button from "../components/Button";
 import AnimatedBorderButton from "../components/AnimatedBorderButton";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
+import {
+  SiReact,
+  SiSvelte,
+  SiTailwindcss,
+  SiNodedotjs,
+  SiExpress,
+  SiMongodb,
+  SiNetlify,
+  SiVercel,
+  SiFigma,
+  SiGit,
+  SiGithub,
+} from "react-icons/si";
 
 const skills = [
-  "React",
-  "Svelte",
-  "Tailwind CSS",
-  "Node.js",
-  "Express.js",
-  "MongoDB",
-  "Netlify",
-  "Vercel",
-  "Figma",
-  "Git",
-  "Github",
+  { name: "React", icon: SiReact },
+  { name: "Svelte", icon: SiSvelte },
+  { name: "Tailwind CSS", icon: SiTailwindcss },
+  { name: "Node.js", icon: SiNodedotjs },
+  { name: "Express.js", icon: SiExpress },
+  { name: "MongoDB", icon: SiMongodb },
+  { name: "Netlify", icon: SiNetlify },
+  { name: "Vercel", icon: SiVercel },
+  { name: "Figma", icon: SiFigma },
+  { name: "Git", icon: SiGit },
+  { name: "Github", icon: SiGithub },
 ];
 
 const Hero = () => {
@@ -79,10 +92,12 @@ const Hero = () => {
 
             {/* CTA's  */}
             <div className="flex flex-wrap gap-4 animate-fade-in animation-delay-300">
-              <Button size="lg">
+              <Button size="lg" onClick={() => {
+                document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+              }}>
                 Contact Me <ArrowRight className="w-5 h-5" />
               </Button>
-              <AnimatedBorderButton>
+              <AnimatedBorderButton href="/Amritpal-resume.pdf" download>
                 <Download className="w-5 h-5" /> Download CV
               </AnimatedBorderButton>
             </div>
@@ -91,8 +106,8 @@ const Hero = () => {
             <div className="flex items-center gap-4 animated-fade-in animation-delay-400">
               <span className="text-sm text-muted-foreground">Follow me:</span>
               {[
-                { icon: <FaGithub size={24} />, href: "#" },
-                { icon: <FaLinkedin size={24} />, href: "#" },
+                { icon: <FaGithub size={24} />, href: "https://github.com/ItsEragon" },
+                { icon: <FaLinkedin size={24} />, href: "https://www.linkedin.com/in/itseragon" },
               ].map((social, idx) => (
                 <a
                   key={idx}
@@ -146,9 +161,10 @@ const Hero = () => {
           <div className="relative overflow-hidden">
             <div className="flex animate-marquee">
               {[...skills, ...skills].map((skill, idx) => (
-                <div key={idx} className="shrink-0 px-8 py-4">
-                  <span className="text-3xl font-semibold text-muted-foreground/50 hover:text-muted-foreground transition-colors">
-                    {skill}
+                <div key={idx} className="shrink-0 px-8 py-4 flex flex-col items-center gap-2">
+                  <skill.icon className="w-10 h-10 text-muted-foreground/50 hover:text-muted-foreground transition-colors" />
+                  <span className="text-sm text-muted-foreground/50 hover:text-muted-foreground transition-colors">
+                    {skill.name}
                   </span>
                 </div>
               ))}
