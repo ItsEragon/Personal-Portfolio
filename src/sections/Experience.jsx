@@ -62,7 +62,7 @@ const Experience = () => {
 
                 {/* Content  */}
                 <div
-                  className={`pl-8 md:pl-0 ${idx % 2 === 0 ? "md:pr-16 md: text-right" : "md:col-start-2 md:pl16"}`}
+                  className={`pl-8 md:pl-0 ${idx % 2 === 0 ? "md:pr-16 md:text-right" : "md:col-start-2 md:pl16"}`}
                 >
                   <div
                     className={`glass p-6 rounded-2xl border border-primary/30 hover:border-primary/50 transition-all duration-500 `}

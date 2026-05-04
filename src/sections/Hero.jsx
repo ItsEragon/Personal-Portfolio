@@ -92,9 +92,14 @@ const Hero = () => {
 
             {/* CTA's  */}
             <div className="flex flex-wrap gap-4 animate-fade-in animation-delay-300">
-              <Button size="lg" onClick={() => {
-                document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
-              }}>
+              <Button
+                size="lg"
+                onClick={() => {
+                  document
+                    .getElementById("contact")
+                    ?.scrollIntoView({ behavior: "smooth" });
+                }}
+              >
                 Contact Me <ArrowRight className="w-5 h-5" />
               </Button>
               <AnimatedBorderButton href="/Amritpal-resume.pdf" download>
@@ -106,12 +111,19 @@ const Hero = () => {
             <div className="flex items-center gap-4 animated-fade-in animation-delay-400">
               <span className="text-sm text-muted-foreground">Follow me:</span>
               {[
-                { icon: <FaGithub size={24} />, href: "https://github.com/ItsEragon" },
-                { icon: <FaLinkedin size={24} />, href: "https://www.linkedin.com/in/itseragon" },
+                {
+                  icon: <FaGithub size={24} />,
+                  href: "https://github.com/ItsEragon",
+                },
+                {
+                  icon: <FaLinkedin size={24} />,
+                  href: "https://www.linkedin.com/in/itseragon",
+                },
               ].map((social, idx) => (
                 <a
                   key={idx}
                   href={social.href}
+                  target="_blank"
                   className="p-2 rounded-full glass hover:bg-primary/10 hover:text-primary transition-all duration-300"
                 >
                   {social.icon}
@@ -161,9 +173,12 @@ const Hero = () => {
           <div className="relative overflow-hidden">
             <div className="flex animate-marquee">
               {[...skills, ...skills].map((skill, idx) => (
-                <div key={idx} className="shrink-0 px-8 py-4 flex flex-col items-center gap-2">
+                <div
+                  key={idx}
+                  className="shrink-0 px-8 py-4 flex flex-col items-center gap-2"
+                >
                   <skill.icon className="w-10 h-10 text-muted-foreground/50 hover:text-muted-foreground transition-colors" />
-                  <span className="text-sm text-muted-foreground/50 hover:text-muted-foreground transition-colors">
+                  <span className="text-sm text-muted-foreground/50 hover:text-muted-foreground transition-colors mb-8">
                     {skill.name}
                   </span>
                 </div>
