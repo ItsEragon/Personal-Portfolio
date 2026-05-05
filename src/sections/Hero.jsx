@@ -1,3 +1,4 @@
+import { useRef, useState, useCallback } from "react";
 import { ArrowRight, ChevronDown, Download } from "lucide-react";
 import Button from "../components/Button";
 import AnimatedBorderButton from "../components/AnimatedBorderButton";
@@ -31,6 +32,32 @@ const skills = [
 ];
 
 const Hero = () => {
+  const skillsRef = useRef(null);
+  const marqueeRef = useRef(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragOffset, setDragOffset] = useState(0);
+  const startX = useRef(0);
+  const startOffset = useRef(0);
+
+  const handlePointerDown = useCallback((e) => {
+    setIsDragging(true);
+    startX.current = e.clientX;
+    startOffset.current = dragOffset;
+    skillsRef.current?.setPointerCapture(e.pointerId);
+  }, [dragOffset]);
+
+  const handlePointerMove = useCallback(
+    (e) => {
+      if (!isDragging) return;
+      const delta = e.clientX - startX.current;
+      setDragOffset(startOffset.current + delta);
+    },
+    [isDragging]
+  );
+
+  const handlePointerUp = useCallback(() => {
+    setIsDragging(false);
+  }, []);
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
       {/* Background Image  */}
@@ -170,8 +197,25 @@ const Hero = () => {
           <p className="text-sm text-muted-foreground mb-6 text-center">
             Technologies I work with
           </p>
-          <div className="relative overflow-hidden">
-            <div className="flex animate-marquee">
+          <div
+            ref={skillsRef}
+            className={`relative overflow-x-auto scrollbar-hide cursor-grab active:cursor-grabbing select-none ${
+              isDragging ? "" : "overflow-hidden"
+            }`}
+            onPointerDown={handlePointerDown}
+            onPointerMove={handlePointerMove}
+            onPointerUp={handlePointerUp}
+            onPointerLeave={handlePointerUp}
+          >
+            <div
+              ref={marqueeRef}
+              className={`flex ${isDragging ? "" : "animate-marquee"}`}
+              style={
+                isDragging
+                  ? { transform: `translateX(${dragOffset}px)` }
+                  : undefined
+              }
+            >
               {[...skills, ...skills].map((skill, idx) => (
                 <div
                   key={idx}
