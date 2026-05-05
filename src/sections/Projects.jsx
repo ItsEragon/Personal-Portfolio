@@ -9,8 +9,8 @@ const projects = [
       "Built a responsive web app using React and Tailwind CSS to detect brain tumors from MRI images. Integrated a FastAPI backend for image processing and real-time prediction.",
     image: "/projects/TumorTracer.webp",
     tags: ["React", "Tailwind CSS", "FastAPI", "Machine Learning"],
-    link: "#",
-    github: "#",
+    link: "https://tumortracerr.netlify.app/",
+    github: "https://github.com/ItsEragon/TumorTracer",
   },
   {
     title: "PassOP - Full Stack Password Manager",
@@ -18,8 +18,8 @@ const projects = [
       "Developed a MERN-based password manager with CRUD functionality, REST APIs, and a responsive UI for managing user credentials efficiently.",
     image: "/projects/PassOP.webp",
     tags: ["React", "Tailwind CSS", "Node.js", "Express.js", "MongoDB"],
-    link: "#",
-    github: "#",
+    link: "https://github.com/ItsEragon/PassOP",
+    github: "https://github.com/ItsEragon/PassOP",
   },
 ];
 
@@ -64,16 +64,19 @@ const Projects = () => {
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-card via-card/50 to-transparent opacity-60" />
+
                 {/* Overlay Links  */}
-                <div className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="absolute inset-0 flex items-center justify-center gap-4 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300">
                   <a
                     href={project.link}
+                    target="_blank"
                     className="p-3 rounded-full glass hover:bg-primary hover:text-primary-foreground transition-all"
                   >
                     <ArrowUpRight className="w-5 h-5" />
                   </a>
                   <a
                     href={project.github}
+                    target="_blank"
                     className="p-3 rounded-full glass hover:bg-primary hover:text-primary-foreground transition-all"
                   >
                     <FaGithub className="w-5 h-5" />
@@ -83,10 +86,11 @@ const Projects = () => {
               {/* Content  */}
               <div className="p-6 space-y-4 ">
                 <div className="flex items-start justify-between">
+                  
                   <h3 className="text-xl font-semibold group-hover:text-primary transition-colors">
                     {project.title}
                   </h3>
-                  <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
+                  <ArrowUpRight className="w-8 h-8 md:w-5 md:h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
                 </div>
                 <p className="text-muted-foreground text-sm">
                   {project.description}
