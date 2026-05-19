@@ -95,7 +95,7 @@ const Hero = () => {
             <div className="animate-fade-in">
               <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm text-primary">
                 <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-                Frontend Developer
+                Full Stack Developer
               </span>
             </div>
 
@@ -111,9 +111,7 @@ const Hero = () => {
                 </span>
               </h1>
               <p className="text-lg text-muted-foreground max-w-lg animate-fade-in animation-delay-200">
-                Hi, I am Amritpal Singh - a Frontend Developer specialising in
-                React, Svelte, Tailwind, and JavaScript. I build scalable,
-                performant web applications that users love.
+                Hi, I am Amritpal Singh - a Full Stack Developer specialising in React, Svelte, Tailwind, JavaScript, MONGODB, Node.js and Express.js. I build scalable, performant web applications that users love.
               </p>
             </div>
 
@@ -182,7 +180,7 @@ const Hero = () => {
                 </div>
                 {/* Stats Badge  */}
                 <div className="absolute -top-4 -left-4 glass rounded-xl px-4 py-3 animate-float animation-delay-500">
-                  <div className="text-2xl font-bold text-primary">7+</div>
+                  <div className="text-2xl font-bold text-primary">8+</div>
                   <div className="text-xs text-muted-foreground">
                     Months Exp.
                   </div>

@@ -1,12 +1,27 @@
 const experiences = [
   {
-    period: "Feb 2026 - Present",
+    period: "May 2026 - Present",
+    role: "Full Stack Developer",
+    company: "Zapify Australia",
+    description:
+      "Building responsive and production-ready web applications using Svelte, Tailwind CSS, Payload CMS, and MongoDB. Working on converting design references into clean, reusable components while collaborating through Git-based workflows.",
+    technologies: [
+      "Svelte",
+      "Tailwind CSS",
+      "JavaScript",
+      "Payload CMS",
+      "MongoDB",
+    ],
+    current: true,
+  },
+  {
+    period: "Feb 2026 - May 2026",
     role: "Frontend Developer Intern",
     company: "Zapify Australia",
     description:
-      "Building responsive and production-ready UI using Svelte and Tailwind CSS. Worked on converting design references into clean, reusable components and collaborated using Git workflows.",
+      "Built responsive and production-ready UI using Svelte and Tailwind CSS. Worked on converting design references into clean, reusable components and collaborated through Git-based workflows.",
     technologies: ["Svelte", "Tailwind CSS", "JavaScript", "Git"],
-    current: true,
+    current: false,
   },
   {
     period: "Jul 2025 - Oct 2025",
@@ -57,7 +72,9 @@ const Experience = () => {
               >
                 {/* Timeline Dot  */}
                 <div className="absolute left-0 md:left-1/2 top-0 w-3 h-3 bg-primary rounded-full -translate-x-1/2 ring-4 ring-background z-10">
-                {exp.current && (<span className="absolute inset-0 rounded-full bg-primary animate-ping opacity-75"/>)}
+                  {exp.current && (
+                    <span className="absolute inset-0 rounded-full bg-primary animate-ping opacity-75" />
+                  )}
                 </div>
 
                 {/* Content  */}

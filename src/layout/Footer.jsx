@@ -15,7 +15,7 @@ const Footer = () => {
           {/* Logo & Copyright */}
           <div className="text-center md:text-left">
             <a href="#" className="text-xl font-bold tracking-tight hover:text-primary">
-              APS<span className="text-primary">.</span>
+              AP<span className="text-primary">.</span>
             </a>
             <p className="text-sm text-muted-foreground mt-2">
               © {currentYear} Made with{" "}

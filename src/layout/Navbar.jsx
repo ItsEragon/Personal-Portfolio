@@ -32,7 +32,7 @@ const Navbar = () => {
           href="#"
           className="text-xl font-bold tracking-tight hover:text-primary"
         >
-          APS<span className="text-primary">.</span>
+          AP<span className="text-primary">.</span>
         </a>
 
         {/* Desktop Nav  */}
