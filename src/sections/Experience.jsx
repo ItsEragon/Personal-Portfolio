@@ -4,13 +4,15 @@ const experiences = [
     role: "Full Stack Developer",
     company: "Zapify Australia",
     description:
-      "Building responsive and production-ready web applications using Svelte, Tailwind CSS, Payload CMS, and MongoDB. Working on converting design references into clean, reusable components while collaborating through Git-based workflows.",
+      "Building and delivering client websites and web applications primarily using Svelte and Payload CMS. Working on CMS customizations, CRM integrations, Shopify Hydrogen storefront development and AWS deployments, while collaborating with clients throughout project delivery.",
     technologies: [
       "Svelte",
       "Tailwind CSS",
       "JavaScript",
       "Payload CMS",
       "MongoDB",
+      "AWS",
+      "SST",
     ],
     current: true,
   },
@@ -19,8 +21,8 @@ const experiences = [
     role: "Frontend Developer Intern",
     company: "Zapify Australia",
     description:
-      "Built responsive and production-ready UI using Svelte and Tailwind CSS. Worked on converting design references into clean, reusable components and collaborated through Git-based workflows.",
-    technologies: ["Svelte", "Tailwind CSS", "JavaScript", "Git"],
+      "Built responsive website interfaces and reusable UI components using Svelte and Tailwind CSS. Translated design references into polished layouts and refined responsive behaviour across client websites.",
+    technologies: ["Svelte", "Tailwind CSS", "JavaScript", "Git", "GitHub"],
     current: false,
   },
   {
