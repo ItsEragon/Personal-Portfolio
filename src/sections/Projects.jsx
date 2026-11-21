@@ -4,6 +4,15 @@ import AnimatedBorderButton from "../components/AnimatedBorderButton";
 
 const projects = [
   {
+    title: "Godown Management System",
+    description:
+      "Independently developed and deployed a full-stack warehouse management application for handling daily godown operations, including truck gate entry, multi-godown inventory management, quality monitoring, billing, Excel reports, role-based access and audit logs.",
+    image: "/projects/GodownManagementSystem.webp",
+    tags: ["React", "Tailwind CSS", "Node.js", "Express.js", "MongoDB"],
+    link: "https://shribalajee.in",
+    // github: "https://github.com/ItsEragon/TumorTracer",
+  },
+  {
     title: "Tumor Tracer - AI Brain Tumor Detection",
     description:
       "Built a responsive web app using React and Tailwind CSS to detect brain tumors from MRI images. Integrated a FastAPI backend for image processing and real-time prediction.",
@@ -12,23 +21,23 @@ const projects = [
     link: "https://tumortracerr.netlify.app/",
     github: "https://github.com/ItsEragon/TumorTracer",
   },
-  {
-    title: "PassOP - Full Stack Password Manager",
-    description:
-      "Developed a MERN-based password manager with CRUD functionality, REST APIs, and a responsive UI for managing user credentials efficiently.",
-    image: "/projects/PassOP.webp",
-    tags: ["React", "Tailwind CSS", "Node.js", "Express.js", "MongoDB"],
-    link: "https://github.com/ItsEragon/PassOP",
-    github: "https://github.com/ItsEragon/PassOP",
-  },
+  // {
+  //   title: "PassOP - Full Stack Password Manager",
+  //   description:
+  //     "Developed a MERN-based password manager with CRUD functionality, REST APIs, and a responsive UI for managing user credentials efficiently.",
+  //   image: "/projects/PassOP.webp",
+  //   tags: ["React", "Tailwind CSS", "Node.js", "Express.js", "MongoDB"],
+  //   link: "https://github.com/ItsEragon/PassOP",
+  //   github: "https://github.com/ItsEragon/PassOP",
+  // },
 ];
 
 const Projects = () => {
   return (
     <section id="projects" className="py-32 relative overflow-hidden">
       {/* Background Glows  */}
-      <div className="absolute top-1/4 right-0 w-96 h-96 bg-primary/5 rounded full blur-3xl"></div>
-      <div className="absolute bottom-1/4 left-0 w-64 h-64 bg-highlight/5 rounded full blur-3xl"></div>
+      <div className="absolute top-1/4 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-1/4 left-0 w-64 h-64 bg-highlight/5 rounded-full blur-3xl"></div>
       <div className="container mx-auto px-6 relative z-10">
         {/* Section Header  */}
         <div className="text-center mx-auto max-w-3xl mb-16">
@@ -70,17 +79,21 @@ const Projects = () => {
                   <a
                     href={project.link}
                     target="_blank"
+                    rel="noopener noreferrer"
                     className="p-3 rounded-full glass hover:bg-primary hover:text-primary-foreground transition-all"
                   >
                     <ArrowUpRight className="w-5 h-5" />
                   </a>
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    className="p-3 rounded-full glass hover:bg-primary hover:text-primary-foreground transition-all"
-                  >
-                    <FaGithub className="w-5 h-5" />
-                  </a>
+                  {project.github && (
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-3 rounded-full glass hover:bg-primary hover:text-primary-foreground transition-all"
+                    >
+                      <FaGithub className="w-5 h-5" />
+                    </a>
+                  )}
                 </div>
               </div>
               {/* Content  */}
