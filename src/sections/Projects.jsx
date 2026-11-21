@@ -1,6 +1,5 @@
 import { ArrowUpRight } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
-import AnimatedBorderButton from "../components/AnimatedBorderButton";
 
 const projects = [
   {

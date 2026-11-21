@@ -49,7 +49,7 @@ const About = () => {
 
             <div className="space-y-4 text-muted-foreground animate-fade-in animation-delay-200">
               <p>
-                I'm a passionate Full Stack Developer with over 8 months of experience crafting digital products that make a difference. My journey started with a curiosity for how things work on the web, and it has evolved into a deep expertise in modern full stack technologies.
+                I'm a passionate Full Stack Developer with over a year of experience crafting digital products that make a difference. My journey started with a curiosity for how things work on the web, and it has evolved into a deep expertise in modern full stack technologies.
               </p>
               <p>
                 I specialize in React, Svelte, Tailwind, JavaScript, MONGODB, Node.js and Express.js, building everything from sleek landing pages to complex enterprise applications. My approach combines technical excellence with a keen eye for design and user experience.

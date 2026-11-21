@@ -63,12 +63,6 @@
         color-mix(in srgb, var(--color-primary) 20%, transparent),
       inset 0 0 20px color-mix(in srgb, var(--color-primary) 5%, transparent);
   }
-
-  .glow-border {
-    box-shadow: 0 0 20px
-        color-mix(in srgb, var(--color-primary) 20%, transparent),
-      inset 0 0 20px color-mix(in srgb, var(--color-primary) 5%, transparent);
-  }
 }
 
 @layer utilities {
@@ -201,5 +195,20 @@
   }
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-fade-in,
+    .animate-fade-in-fast,
+    .animate-float,
+    .animate-marquee,
+    .animate-ping,
+    .animate-pulse,
+    .animate-bounce {
+      animation: none !important;
+    }
+    html {
+      scroll-behavior: auto;
+    }
   }
 }

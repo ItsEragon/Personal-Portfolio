@@ -15,7 +15,8 @@ const contactInfo = [
     icon: MapPin,
     label: "Location",
     value: "Siliguri, West Bengal, India",
-    href: "#",
+    href: "https://maps.app.goo.gl/s5fAvD6L3QR2Vpe29",
+    external: true,
   },
   {
     icon: FaLinkedin,
@@ -33,6 +34,7 @@ const Contact = () => {
   });
 
   const [isLoading, setIsLoading] = useState(false);
+  const [honeypot, setHoneypot] = useState("");
   const [submitStatus, setSubmitStatus] = useState({
     type: null, // 'success' or 'error'
     message: "",
@@ -40,6 +42,15 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Honeypot: real users never see or fill this field.
+    if (honeypot) {
+      setSubmitStatus({
+        type: "success",
+        message: "Message sent successfully! I'll get back to you soon.",
+      });
+      return;
+    }
 
     setIsLoading(true);
     setSubmitStatus({ type: null, message: "" });
@@ -50,9 +61,10 @@ const Contact = () => {
       const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
       if (!serviceId || !templateId || !publicKey) {
-        throw new Error(
-          "EmailJS configuration is missing. Please check your environment variables.",
+        console.error(
+          "EmailJS configuration is missing. Check VITE_EMAILJS_SERVICE_ID, VITE_EMAILJS_TEMPLATE_ID and VITE_EMAILJS_PUBLIC_KEY.",
         );
+        throw new Error("emailjs-not-configured");
       }
 
       await emailjs.send(
@@ -75,7 +87,8 @@ const Contact = () => {
       console.error("EmailJS error:", err);
       setSubmitStatus({
         type: "error",
-        message: err.text || "Failed to send message. Please try again later.",
+        message:
+          "Something went wrong sending your message. Please try again, or email me directly at amritps2001@gmail.com.",
       });
     } finally {
       setIsLoading(false);
@@ -110,6 +123,16 @@ const Contact = () => {
         <div className="grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
           <div className="glass p-8 rounded-3xl border border-primary/30 animate-fade-in animation-delay-300">
             <form className="space-y-6" onSubmit={handleSubmit}>
+              <input
+                type="text"
+                name="website"
+                value={honeypot}
+                onChange={(e) => setHoneypot(e.target.value)}
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                className="absolute -left-[9999px] w-px h-px opacity-0"
+              />
               <div>
                 <label
                   htmlFor="name"
@@ -215,6 +238,9 @@ const Contact = () => {
                   <a
                     key={i}
                     href={item.href}
+                    {...(item.external
+                      ? { target: "_blank", rel: "noopener noreferrer" }
+                      : {})}
                     className="flex items-center gap-4 p-4 rounded-xl hover:bg-surface transition-colors group"
                   >
                     <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">

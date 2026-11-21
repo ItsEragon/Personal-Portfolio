@@ -31,6 +31,14 @@ const skills = [
   { name: "Github", icon: SiGithub },
 ];
 
+// Generated once at module load so the dots stay still across re-renders.
+const dots = [...Array(30)].map(() => ({
+  left: `${Math.random() * 100}%`,
+  top: `${Math.random() * 100}%`,
+  animation: `slow-drift ${15 + Math.random() * 20}s ease-in-out infinite`,
+  animationDelay: `${Math.random() * 5}s`,
+}));
+
 const Hero = () => {
   const skillsRef = useRef(null);
   const marqueeRef = useRef(null);
@@ -64,7 +72,7 @@ const Hero = () => {
       <div className="absolute inset-0">
         <img
           src="/hero-bg.jpg"
-          alt="Hero image"
+          alt=""
           className="w-full h-full object-cover opacity-40"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/80 to-background" />
@@ -72,17 +80,11 @@ const Hero = () => {
 
       {/* Green Dots  */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(30)].map((_, i) => (
+        {dots.map((dot, i) => (
           <div
             key={i}
             className="absolute w-1.5 h-1.5 rounded-full opacity-60"
-            style={{
-              backgroundColor: "#20B2A6",
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animation: `slow-drift ${15 + Math.random() * 20}s ease-in-out infinite`,
-              animationDelay: `${Math.random() * 5}s`,
-            }}
+            style={{ backgroundColor: "#20B2A6", ...dot }}
           />
         ))}
       </div>
@@ -133,22 +135,26 @@ const Hero = () => {
             </div>
 
             {/* Social Links  */}
-            <div className="flex items-center gap-4 animated-fade-in animation-delay-400">
+            <div className="flex items-center gap-4 animate-fade-in animation-delay-400">
               <span className="text-sm text-muted-foreground">Follow me:</span>
               {[
                 {
                   icon: <FaGithub size={24} />,
                   href: "https://github.com/ItsEragon",
+                  label: "GitHub",
                 },
                 {
                   icon: <FaLinkedin size={24} />,
                   href: "https://www.linkedin.com/in/itseragon",
+                  label: "LinkedIn",
                 },
               ].map((social, idx) => (
                 <a
                   key={idx}
                   href={social.href}
                   target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.label}
                   className="p-2 rounded-full glass hover:bg-primary/10 hover:text-primary transition-all duration-300"
                 >
                   {social.icon}
@@ -180,9 +186,9 @@ const Hero = () => {
                 </div>
                 {/* Stats Badge  */}
                 <div className="absolute -top-4 -left-4 glass rounded-xl px-4 py-3 animate-float animation-delay-500">
-                  <div className="text-2xl font-bold text-primary">8+</div>
+                  <div className="text-2xl font-bold text-primary">1+</div>
                   <div className="text-xs text-muted-foreground">
-                    Months Exp.
+                    Year Exp.
                   </div>
                 </div>
               </div>
