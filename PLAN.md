@@ -1,7 +1,7 @@
 # AMRITPAL — THE SERIES · Redesign Plan
 
 > Living document. Update the phase status table and progress log as work lands.
-> Last updated: 2026-11-28 · All phases complete
+> Last updated: 2026-11-28 · All phases complete · SEO pass
 
 ## 1. Mission
 
@@ -433,6 +433,7 @@ Status: `Not started` / `In progress` / `Done`
 | 2026-11-27 | Phase 4 | TopPicks + Achievements + Resume; 7 sections, Continue Exploring visible, full nav | Cert blocks conditional; one award card; build/lint green; not committed/pushed |
 | 2026-11-27 | Portrait | Enhanced 4x source wired into `npm run portrait`; bust regenerated 720/420 | Sharper hero without changing framing; not committed/pushed |
 | 2026-11-28 | Phase 5 | Profile picker, navbar switcher, toast, persona orders; favicon + OG; README; removed unused hero/profile assets | All phases complete; build/lint green; not committed/pushed |
+| 2026-11-28 | SEO | Page/OG/Twitter title set to Full Stack Developer, image type/alt, robots meta, Person + WebSite JSON-LD, sitemap lastmod, new apple-touch-icon | Node-validated JSON-LD; build/lint green |
 | 2026-11-27 | Dates | Confirmed Zapify internship Feb–Apr 2026 and May 2026 full-time conversion | Data already matched; plan discrepancy resolved |
 | 2026-11-27 | Plan | `PLAN.md` moved to repo root and kept as living doc | Review Phase 1 before Phase 2 |
 
