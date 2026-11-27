@@ -39,6 +39,8 @@ npm run portrait
 
 This writes `public/assets/portrait-720.webp` and `portrait-420.webp` using the reference head-and-shoulders framing.
 
+Icons: `npm run favicon` rebuilds `public/favicon.ico` (16–256px, PNG-frame) from `public/favicon.svg`.
+
 ## Structure
 
 ```
@@ -53,6 +55,8 @@ src/
 public/
   assets/portrait-*.webp
   favicon.svg
+  favicon.ico
+  apple-touch-icon.png
   og-image.jpg
   Amritpal-resume.pdf
 scripts/build-portrait.mjs

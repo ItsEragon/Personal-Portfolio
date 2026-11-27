@@ -389,7 +389,7 @@ Status: `Not started` / `In progress` / `Done`
 2. **Screenshots** — kept on disk, unused for now (option A).
 2b. **Portrait 4x** — `public/portrait-4x.webp` (3072×5460) is the enhanced source now used by `npm run portrait`; outputs are 720×677 (61 KB) and 420×395 (27 KB).
 3. **OG image** — done: `public/og-image.jpg`, 1200×630 crimson portrait title card.
-4. **Favicon** — done: `public/favicon.svg`, crimson "A" monogram; ICO/apple-touch retained as fallback.
+4. **Favicon** — done: `public/favicon.svg`, crimson "A" monogram; `public/favicon.ico` regenerated as a PNG-frame ICO at 16/32/48/64/128/256 (8.5 KB); apple-touch generated from the same source.
 5. **Resume PDF** — keep current file; replace if it is stale relative to the LaTeX (cannot verify PDF text).
 
 ## 9. Open items / discrepancies
@@ -434,6 +434,7 @@ Status: `Not started` / `In progress` / `Done`
 | 2026-11-27 | Portrait | Enhanced 4x source wired into `npm run portrait`; bust regenerated 720/420 | Sharper hero without changing framing; not committed/pushed |
 | 2026-11-28 | Phase 5 | Profile picker, navbar switcher, toast, persona orders; favicon + OG; README; removed unused hero/profile assets | All phases complete; build/lint green; not committed/pushed |
 | 2026-11-28 | SEO | Page/OG/Twitter title set to Full Stack Developer, image type/alt, robots meta, Person + WebSite JSON-LD, sitemap lastmod, new apple-touch-icon | Node-validated JSON-LD; build/lint green |
+| 2026-11-28 | Favicon | `favicon.ico` regenerated from `favicon.svg` at 16–256px; compressed to PNG-frame ICO (8.5 KB); links cache-busted with `?v=20261128b` | Pushed |
 | 2026-11-27 | Dates | Confirmed Zapify internship Feb–Apr 2026 and May 2026 full-time conversion | Data already matched; plan discrepancy resolved |
 | 2026-11-27 | Plan | `PLAN.md` moved to repo root and kept as living doc | Review Phase 1 before Phase 2 |
 
