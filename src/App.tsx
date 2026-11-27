@@ -8,6 +8,9 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Scene from './components/Scene';
 import About from './components/About';
+import Seasons from './components/Seasons';
+import Skills from './components/Skills';
+import ContinueWatching from './components/ContinueWatching';
 import FinalCTA from './components/FinalCTA';
 import { EASE } from './components/fx';
 
@@ -16,7 +19,10 @@ const PlayIntro = lazy(() => import('./components/PlayIntro'));
 type Stage = 'opening' | 'home';
 
 /** Sections live in the nav/Continue row as each phase lands. */
-const PHASE_ORDER: SectionId[] = ['about'];
+const PHASE_ORDER: SectionId[] = ['about', 'journey', 'skills'];
+
+/** Option B: the Continue Exploring row only appears once all seven sections exist. */
+const ALL_SECTIONS = 7;
 
 export default function App() {
   return (
@@ -50,8 +56,15 @@ function Series() {
           <Navbar order={PHASE_ORDER} />
           <main>
             <Hero onPlay={() => setPlaying(true)} onResume={() => {}} profileId="amritpal" />
+            {PHASE_ORDER.length === ALL_SECTIONS && <ContinueWatching order={PHASE_ORDER} />}
             <Scene id="about">
               <About />
+            </Scene>
+            <Scene id="journey">
+              <Seasons />
+            </Scene>
+            <Scene id="skills">
+              <Skills />
             </Scene>
             <FinalCTA onReplay={() => setStage('opening')} />
           </main>

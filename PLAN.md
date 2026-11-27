@@ -272,7 +272,7 @@ Status: `Not started` / `In progress` / `Done`
 | Phase | Scope | Status |
 |---|---|---|
 | 1 | Foundation + cinematic shell + Hero + About + Final CTA | Done — verified, review pending |
-| 2 | My Journey (Seasons) + Skills + Continue Exploring | Not started |
+| 2 | My Journey (Seasons) + Skills + Continue Exploring | Done — verified |
 | 3 | Originals (pinned scroll, cards, modal, screenshots) | Not started |
 | 4 | Top Picks + Achievements + Resume | Not started |
 | 5 | Play Intro + profile picker + brand assets + cleanup + QA | In progress — PlayIntro done early; profiles/polish pending |
@@ -302,10 +302,20 @@ Status: `Not started` / `In progress` / `Done`
 
 ### Phase 2 — Journey + Skills + Continue Watching
 
-- [ ] Add seasons, episodes, skills and section metadata to data
-- [ ] Port `Seasons`, `EpisodeCard`, `Skills`, `ContinueWatching`, rail buttons
-- [ ] Add Journey + Skills nav links and Continue cards
-- [ ] Acceptance: season tabs and rail arrows; skill evidence hover/tap; progress bars track; build passes
+- [x] Add seasons, episodes, skills and section metadata to data
+- [x] Port `Seasons`, `EpisodeCard`, `Skills`, `ContinueWatching`, rail buttons
+- [x] Add Journey + Skills nav links and sections
+- [x] Acceptance: season tabs and rail arrows; skill evidence hover/tap; progress bars track; build passes
+
+**Phase 2 result (2026-11-27)**
+- New components: `Seasons.tsx`, `EpisodeCard.tsx`, `Skills.tsx`, `ContinueWatching.tsx`.
+- App order is now `about → journey → skills`; Navbar shows Home / About / Journey / Skills / Let’s Build.
+- Journey uses the 4 seasons / 9 episodes already in data; default active season is S03 (reference `length - 2`).
+- Skills uses the 5 categories + evidence mapping; category tabs and evidence reveal work.
+- ContinueWatching is built and verified with 3 cards, but **gated** behind `PHASE_ORDER.length === 7` (option B), so it stays hidden until Phase 4 adds the last sections.
+- Verified: season switching (S03 → S01), episode rail, mobile season/category rails, skill evidence, build + lint, 0 console errors.
+- Screenshots: `.playwright-mcp/phase2-*.png`.
+- Next: Phase 3 — Originals (also activates Hero “My Work”).
 
 ### Phase 3 — Originals
 
@@ -376,6 +386,7 @@ Status: `Not started` / `In progress` / `Done`
 | 2026-11-27 | Assets | `portrait.png` trimmed → 560/420 WebP via `sharp` + `npm run portrait` | ~1.07 MB PNG → 109/72 KB WebP |
 | 2026-11-27 | Exact pass | Opening/Hero/About reverted to reference; removed ring/overlay/badge/custom clamps; About collapsed to reference structure; `PlayIntro` ported | Build/lint green; desktop/mobile verified |
 | 2026-11-27 | Portrait | Cutout cropped to reference head-and-shoulders 720×677 / 420×395; data + preload updated | Live compare: image 823.2×774 vs reference 823.4×774 |
+| 2026-11-27 | Phase 2 | Seasons + EpisodeCard + Skills + ContinueWatching; nav/sections wired | ContinueWatching gated until all 7 sections; build/lint green |
 | 2026-11-27 | Plan | `PLAN.md` moved to repo root and kept as living doc | Review Phase 1 before Phase 2 |
 
 ## 12. Commands
