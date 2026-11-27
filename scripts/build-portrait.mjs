@@ -1,4 +1,5 @@
 import sharp from 'sharp';
+import { existsSync } from 'node:fs';
 import { mkdir } from 'node:fs/promises';
 
 /**
@@ -6,7 +7,8 @@ import { mkdir } from 'node:fs/promises';
  * The reference uses a head-and-shoulders frame (720x677 / 420x395).
  * Run `npm run portrait` after replacing public/portrait.png.
  */
-const source = 'public/portrait.png';
+const source = ['public/portrait-4x.webp', 'public/portrait.png'].find(existsSync);
+if (!source) throw new Error('No portrait source found in public/');
 const outDir = 'public/assets';
 const transparent = { r: 0, g: 0, b: 0, alpha: 0 };
 
@@ -36,6 +38,7 @@ const frame = await sharp(bust)
   .toBuffer();
 
 await sharp(frame).toFile(`${outDir}/portrait-720.webp`);
+console.log(`source: ${source}`);
 await sharp(frame).resize({ width: 420 }).webp({ quality: 84, alphaQuality: 90, effort: 6 }).toFile(`${outDir}/portrait-420.webp`);
 
 console.log(`${outDir}/portrait-720.webp`);

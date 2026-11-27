@@ -517,6 +517,6 @@ export const sectionMeta: Record<SectionId, { nav: string; card: string; meta: s
   originals: { nav: 'Originals', card: 'My Projects', meta: `${projects.length} Originals`, palette: crimson },
   picks: { nav: 'Top Picks', card: 'Top Picks', meta: 'Top 10 from the resume', palette: jade },
   skills: { nav: 'Skills', card: 'My Skills', meta: `${skillCategories.length} Categories`, palette: ocean },
-  moments: { nav: 'Moments', card: 'My Achievements', meta: `${achievements.length} Moments`, palette: crimson },
+  moments: { nav: 'Moments', card: 'My Achievements', meta: `${achievements.length} ${achievements.length === 1 ? 'Moment' : 'Moments'}`, palette: crimson },
   story: { nav: 'Resume', card: 'The Full Story', meta: 'Resume • View & download', palette: violet },
 };

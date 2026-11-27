@@ -274,7 +274,7 @@ Status: `Not started` / `In progress` / `Done`
 | 1 | Foundation + cinematic shell + Hero + About + Final CTA | Done — verified, review pending |
 | 2 | My Journey (Seasons) + Skills + Continue Exploring | Done — verified |
 | 3 | Originals (pinned scroll, cards, modal) | Done — verified |
-| 4 | Top Picks + Achievements + Resume | Not started |
+| 4 | Top Picks + Achievements + Resume | Done — verified |
 | 5 | Play Intro + profile picker + brand assets + cleanup + QA | In progress — PlayIntro done early; profiles/polish pending |
 
 ### Phase 1 — Foundation + shell + Hero + About
@@ -339,11 +339,24 @@ Status: `Not started` / `In progress` / `Done`
 
 ### Phase 4 — Top Picks + Achievements + Resume
 
-- [ ] Add top picks, achievement and resume data
-- [ ] Port `TopPicks`, `Achievements` (cert rail conditional), `ResumeViewer`, `ResumeModal`
-- [ ] Resume sheet: education, experience, projects, skills, achievement; download + iframe/sheet
-- [ ] Add nav links and Continue cards for picks/moments/story
-- [ ] Acceptance: all 7 sections reachable; PDF fallback on mobile; build passes
+- [x] Add top picks, achievement and resume data
+- [x] Port `TopPicks`, `Achievements` (cert rail conditional), `ResumeViewer`, `ResumeModal`
+- [x] Resume sheet: education, experience, projects, skills, achievement; download + iframe/sheet
+- [x] Add nav links and Continue cards for picks/moments/story
+- [x] Acceptance: all 7 sections reachable; PDF fallback on mobile; build passes
+
+**Phase 4 result (2026-11-27)**
+- New components: `TopPicks.tsx`, `Achievements.tsx`, `ResumeViewer.tsx`, `ResumeModal.tsx`.
+- Full 7-section order: about → journey → originals → picks → skills → moments → story.
+- Continue Exploring is now visible with all 7 cards; nav is Home / About / Journey / Originals / Top Picks / Skills / Moments / Resume / Let’s Build.
+- Top Picks shows all 10 real facts and the reference numbered rail.
+- Moments: one normal-width award card (option A); certification rail is conditionally rendered and currently hidden, code retained for future data.
+- Resume: stats are CGPA 7.78 · 2 Originals · 3 Roles; copy adapted; certifications block conditional and hidden; download is `Amritpal-Singh-Resume.pdf`; desktop iframe + mobile sheet verified.
+- Fixed a duplicate React key in the resume Work Experience list (two Zapify Australia roles).
+- Verified: full nav, Continue row 7 cards, Top Picks, one award card, resume section/modal, mobile sheet, Esc/scroll lock, build + lint, 0 console errors.
+- Screenshots: `.playwright-mcp/phase4-*.png`.
+- **Not committed / not pushed** per the standing rule.
+- Enhanced `public/portrait-4x.webp` (3072×5460) is now the preferred source; the 720×677 / 420×395 bust was regenerated from it for 4K sharpness.
 
 ### Phase 5 — Play Intro + profiles + polish
 
@@ -357,20 +370,21 @@ Status: `Not started` / `In progress` / `Done`
 
 ## 8. Assets
 
-1. **Cutout** — supplied at `public/portrait.png` (768×1365, ARGB alpha). `npm run portrait` trims it, crops the top head-and-shoulders slice, adds the reference side padding, and writes `public/assets/portrait-720.webp` (720×677) + `portrait-420.webp` (420×395); `profile.portrait` points at the 720 variant. Re-run the script if the source is replaced.
+1. **Cutout** — `public/portrait-4x.webp` (3072×5460, ARGB alpha) is the preferred source, with `public/portrait.png` as fallback. `npm run portrait` trims it, crops the top head-and-shoulders slice, adds the reference side padding, and writes `public/assets/portrait-720.webp` (720×677) + `portrait-420.webp` (420×395); `profile.portrait` points at the 720 variant. Re-run the script if the source is replaced.
 2. **Screenshots** — kept on disk, unused for now (option A).
+2b. **Portrait 4x** — `public/portrait-4x.webp` (3072×5460) is the enhanced source now used by `npm run portrait`; outputs are 720×677 (61 KB) and 420×395 (27 KB).
 3. **OG image** — crimson title card with cutout + "AMRITPAL — THE SERIES" at 1200×630.
 4. **Favicon** — simple crimson "A" monogram SVG; keep ICO/apple-touch as fallback.
 5. **Resume PDF** — keep current file; replace if it is stale relative to the LaTeX (cannot verify PDF text).
 
 ## 9. Open items / discrepancies
 
-- **Zapify intern end date:** current site says May 2026; resume says Apr 2026 → using **Apr 2026**.
+- **Zapify dates (confirmed by user):** Frontend Developer Intern **Feb 2026 – Apr 2026**; converted to **Full Stack Developer from May 2026**. The data and seasons already use these dates.
 - **Resume PDF vs LaTeX:** PDF text cannot be read here. The download may not match the LaTeX. User should replace `public/Amritpal-resume.pdf` with a freshly compiled PDF if needed.
 - **Tumor Tracer year:** unknown → no year badge.
 - **Certifications:** none; rail hidden until data exists.
 - **Phone number:** on the resume, not displayed on the site.
-- **Hero cutout:** supplied and cropped to the reference 720×677 headshot. The subject crop is ~605×569 upscaled to 720, so very large 4K screens may soften it; there is no higher-resolution source.
+- **Hero cutout:** supplied and cropped to the reference 720×677 headshot. Regenerated from the enhanced 3072×5460 source, so it is now a downscale instead of an upscale; the 4K softness is resolved.
 - **ESLint 10 + typescript-eslint:** compatible (8.74 supports ESLint 10); lint clean.
 - **Opening exit:** `AnimatePresence` removed to fix a reduced-motion click blocker; the home fades in on its own. This is the only intentional code deviation from the reference; no visual additions.
 - **Profile picker / navbar avatar:** still Phase 5. Hero uses the default `amritpal` persona.
@@ -401,6 +415,9 @@ Status: `Not started` / `In progress` / `Done`
 | 2026-11-27 | Portrait | Cutout cropped to reference head-and-shoulders 720×677 / 420×395; data + preload updated | Live compare: image 823.2×774 vs reference 823.4×774 |
 | 2026-11-27 | Phase 2 | Seasons + EpisodeCard + Skills + ContinueWatching; nav/sections wired | ContinueWatching gated until all 7 sections; build/lint green |
 | 2026-11-27 | Phase 3 | Originals + ProjectCard + ProjectModal; pinned/rail, shared transition, Live Site links | Option A (no screenshot stills); build/lint green; not committed/pushed |
+| 2026-11-27 | Phase 4 | TopPicks + Achievements + Resume; 7 sections, Continue Exploring visible, full nav | Cert blocks conditional; one award card; build/lint green; not committed/pushed |
+| 2026-11-27 | Portrait | Enhanced 4x source wired into `npm run portrait`; bust regenerated 720/420 | Sharper hero without changing framing; not committed/pushed |
+| 2026-11-27 | Dates | Confirmed Zapify internship Feb–Apr 2026 and May 2026 full-time conversion | Data already matched; plan discrepancy resolved |
 | 2026-11-27 | Plan | `PLAN.md` moved to repo root and kept as living doc | Review Phase 1 before Phase 2 |
 
 ## 12. Commands

@@ -10,9 +10,13 @@ import Scene from './components/Scene';
 import About from './components/About';
 import Seasons from './components/Seasons';
 import Originals from './components/Originals';
+import TopPicks from './components/TopPicks';
 import Skills from './components/Skills';
+import Achievements from './components/Achievements';
+import ResumeSection from './components/ResumeViewer';
 import ContinueWatching from './components/ContinueWatching';
 import ProjectModal from './components/ProjectModal';
+import ResumeModal from './components/ResumeModal';
 import FinalCTA from './components/FinalCTA';
 import { EASE } from './components/fx';
 
@@ -21,7 +25,7 @@ const PlayIntro = lazy(() => import('./components/PlayIntro'));
 type Stage = 'opening' | 'home';
 
 /** Sections live in the nav/Continue row as each phase lands. */
-const PHASE_ORDER: SectionId[] = ['about', 'journey', 'originals', 'skills'];
+const PHASE_ORDER: SectionId[] = ['about', 'journey', 'originals', 'picks', 'skills', 'moments', 'story'];
 
 /** Option B: the Continue Exploring row only appears once all seven sections exist. */
 const ALL_SECTIONS = 7;
@@ -38,6 +42,7 @@ function Series() {
   const [stage, setStage] = useState<Stage>('opening');
   const [playing, setPlaying] = useState(false);
   const [project, setProject] = useState<Project | null>(null);
+  const [resumeOpen, setResumeOpen] = useState(false);
   const { lock, unlock } = useSmoothScroll();
 
   useEffect(() => {
@@ -69,15 +74,25 @@ function Series() {
             <Scene id="originals" className="!py-0 sm:!py-0">
               <Originals onOpen={setProject} />
             </Scene>
+            <Scene id="picks">
+              <TopPicks />
+            </Scene>
             <Scene id="skills">
               <Skills />
             </Scene>
-            <FinalCTA onReplay={() => { setProject(null); setStage('opening'); }} />
+            <Scene id="moments">
+              <Achievements />
+            </Scene>
+            <Scene id="story">
+              <ResumeSection onView={() => setResumeOpen(true)} />
+            </Scene>
+            <FinalCTA onReplay={() => { setProject(null); setResumeOpen(false); setStage('opening'); }} />
           </main>
         </motion.div>
       )}
 
       {project && <ProjectModal project={project} onClose={() => setProject(null)} onSwitch={setProject} />}
+      {resumeOpen && <ResumeModal onClose={() => setResumeOpen(false)} />}
 
       <Suspense fallback={null}>{playing && <PlayIntro onClose={() => setPlaying(false)} />}</Suspense>
     </LayoutGroup>
