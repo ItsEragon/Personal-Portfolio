@@ -31,7 +31,7 @@ Contact actions are limited to email, LinkedIn and GitHub. There is no contact f
 
 ## Portrait
 
-The transparent source is `public/portrait-4x.webp` (fallback: `public/portrait.png`). Regenerate the responsive bust after replacing it:
+The transparent source is `assets-src/portrait-4x.webp` (fallback: `assets-src/portrait.png`). Regenerate the responsive bust after replacing it:
 
 ```bash
 npm run portrait
@@ -44,6 +44,7 @@ Icons: `npm run favicon` rebuilds `public/favicon.ico` (16–256px, PNG-frame) f
 ## Structure
 
 ```
+assets-src/              portrait sources (not served)
 src/
   App.tsx              opening → Who's watching? → home; overlays; toast
   data/portfolio.ts    single source of truth
@@ -60,6 +61,7 @@ public/
   og-image.jpg
   Amritpal-resume.pdf
 scripts/build-portrait.mjs
+scripts/build-favicon.mjs
 ```
 
 ## Notes

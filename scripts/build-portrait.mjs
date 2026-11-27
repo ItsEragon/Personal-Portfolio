@@ -7,8 +7,8 @@ import { mkdir } from 'node:fs/promises';
  * The reference uses a head-and-shoulders frame (720x677 / 420x395).
  * Run `npm run portrait` after replacing public/portrait.png.
  */
-const source = ['public/portrait-4x.webp', 'public/portrait.png'].find(existsSync);
-if (!source) throw new Error('No portrait source found in public/');
+const source = ['assets-src/portrait-4x.webp', 'assets-src/portrait.png'].find(existsSync);
+if (!source) throw new Error('No portrait source found in assets-src/');
 const outDir = 'public/assets';
 const transparent = { r: 0, g: 0, b: 0, alpha: 0 };
 

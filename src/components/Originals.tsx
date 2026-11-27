@@ -98,7 +98,7 @@ function PinnedOriginals({ onOpen }: { onOpen: (p: Project) => void }) {
 
 function RailOriginals({ onOpen }: { onOpen: (p: Project) => void }) {
   return (
-    <div className="py-6">
+    <div className="overflow-hidden py-6">
       <div className="gutter mb-6">
         <Intro />
       </div>

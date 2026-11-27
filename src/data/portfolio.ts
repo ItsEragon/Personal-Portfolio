@@ -17,8 +17,6 @@ export const profile = {
   tagline: ['Full Stack Developer', 'Svelte · React', 'Node.js · AWS'],
   intro:
     'Hi, I am Amritpal Singh — a Full Stack Developer specialising in React, Svelte, Tailwind, JavaScript, MongoDB, Node.js and Express.js. I build scalable, performant web applications that users love.',
-  summary:
-    'Full Stack Developer experienced in building client websites and business applications using Svelte, React, Payload CMS and the MERN stack. Hands-on experience with CMS and CRM integrations, Shopify Hydrogen storefront development, AWS deployments and client collaboration.',
   location: 'Siliguri, West Bengal, India',
   email: 'amritps2001@gmail.com',
   links: {
@@ -31,7 +29,6 @@ export const profile = {
     srcSet: '/assets/portrait-420.webp 420w, /assets/portrait-720.webp 720w',
     alt: 'Portrait of Amritpal Singh',
   },
-  availability: 'Available for work',
   interests: ['Cloud & AWS', 'E-commerce (Shopify Hydrogen)', 'Full-Stack Engineering'],
 };
 
@@ -80,22 +77,6 @@ export const experience = [
     ],
   },
 ];
-
-export const about = {
-  quote:
-    'My mission is to create digital experiences that are not just functional, but truly delightful — products that users love to use and developers love to maintain.',
-  paragraphs: [
-    "I'm a passionate Full Stack Developer with over a year of experience crafting digital products that make a difference. My journey started with a curiosity for how things work on the web, and it has evolved into a deep expertise in modern full stack technologies.",
-    'I specialize in React, Svelte, Tailwind, JavaScript, MongoDB, Node.js and Express.js, building everything from sleek landing pages to complex enterprise applications. My approach combines technical excellence with a keen eye for design and user experience.',
-    "When I'm not coding, you'll find me exploring new technologies, contributing to open-source projects, or sharing knowledge with the developer community.",
-  ],
-  highlights: [
-    { title: 'Clean Code', description: 'Writing maintainable, scalable code that stands the test of time.' },
-    { title: 'Performance', description: 'Optimizing for speed and delivering lightning-fast user experiences.' },
-    { title: 'Collaboration', description: 'Working closely with teams to bring ideas to life.' },
-    { title: 'Innovation', description: 'Staying ahead with the latest technologies and best practices.' },
-  ],
-};
 
 export type Metric = { value: string; label: string };
 
