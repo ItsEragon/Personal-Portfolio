@@ -1,9 +1,10 @@
-import { lazy, Suspense, useEffect, useState } from 'react';
+import { lazy, Suspense, useEffect, useState, type ReactNode } from 'react';
 import { LayoutGroup, motion } from 'framer-motion';
-import type { Project, SectionId } from './data/portfolio';
+import { viewerProfiles, type ProfileId, type Project, type SectionId } from './data/portfolio';
 import { SmoothScrollProvider, useSmoothScroll } from './hooks/smoothScroll';
 import CustomCursor from './components/CustomCursor';
 import OpeningSequence from './components/OpeningSequence';
+import ProfileSelector from './components/ProfileSelector';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Scene from './components/Scene';
@@ -22,13 +23,18 @@ import { EASE } from './components/fx';
 
 const PlayIntro = lazy(() => import('./components/PlayIntro'));
 
-type Stage = 'opening' | 'home';
+type Stage = 'opening' | 'profiles' | 'home';
 
-/** Sections live in the nav/Continue row as each phase lands. */
-const PHASE_ORDER: SectionId[] = ['about', 'journey', 'originals', 'picks', 'skills', 'moments', 'story'];
+const STORAGE_KEY = 'amritpal-series-profile';
 
-/** Option B: the Continue Exploring row only appears once all seven sections exist. */
-const ALL_SECTIONS = 7;
+function readStoredProfile(): ProfileId | null {
+  try {
+    const v = sessionStorage.getItem(STORAGE_KEY);
+    return viewerProfiles.some((p) => p.id === v) ? (v as ProfileId) : null;
+  } catch {
+    return null;
+  }
+}
 
 export default function App() {
   return (
@@ -39,11 +45,16 @@ export default function App() {
 }
 
 function Series() {
-  const [stage, setStage] = useState<Stage>('opening');
+  const stored = readStoredProfile();
+  const [stage, setStage] = useState<Stage>(stored ? 'home' : 'opening');
+  const [profileId, setProfileId] = useState<ProfileId>(stored ?? 'amritpal');
   const [playing, setPlaying] = useState(false);
   const [project, setProject] = useState<Project | null>(null);
   const [resumeOpen, setResumeOpen] = useState(false);
-  const { lock, unlock } = useSmoothScroll();
+  const [toast, setToast] = useState<string | null>(null);
+  const { scrollTo, lock, unlock } = useSmoothScroll();
+
+  const order = viewerProfiles.find((p) => p.id === profileId)!.order;
 
   useEffect(() => {
     if (stage === 'home') return;
@@ -51,43 +62,71 @@ function Series() {
     return unlock;
   }, [stage, lock, unlock]);
 
+  const pickProfile = (id: ProfileId) => {
+    setProfileId(id);
+    try {
+      sessionStorage.setItem(STORAGE_KEY, id);
+    } catch {
+      /* storage unavailable — profile simply won't persist */
+    }
+    if (stage !== 'home') {
+      window.scrollTo(0, 0);
+      setStage('home');
+    } else {
+      const p = viewerProfiles.find((v) => v.id === id)!;
+      setToast(`Now watching as ${p.name} — ${p.blurb.toLowerCase()}`);
+      scrollTo(0, { offset: 0 });
+    }
+  };
+
+  useEffect(() => {
+    if (!toast) return;
+    const t = window.setTimeout(() => setToast(null), 3200);
+    return () => clearTimeout(t);
+  }, [toast]);
+
+  const sections: Record<SectionId, ReactNode> = {
+    about: <About />,
+    journey: <Seasons />,
+    originals: <Originals onOpen={setProject} />,
+    picks: <TopPicks />,
+    skills: <Skills />,
+    moments: <Achievements />,
+    story: <ResumeSection onView={() => setResumeOpen(true)} />,
+  };
+
   return (
     <LayoutGroup>
       <div className="grain" aria-hidden />
       <CustomCursor />
 
-      {/* No AnimatePresence here: its exit animation can stall under reduced motion and leave a click blocker. */}
-      {stage === 'opening' && <OpeningSequence onDone={() => setStage('home')} />}
+      {stage === 'opening' && <OpeningSequence onDone={() => setStage('profiles')} />}
+      {stage === 'profiles' && <ProfileSelector onPick={pickProfile} />}
 
       {stage === 'home' && (
         <motion.div initial={{ opacity: 0, scale: 1.03, filter: 'blur(10px)' }} animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }} transition={{ duration: 1, ease: EASE }}>
-          <Navbar order={PHASE_ORDER} />
+          <Navbar order={order} profileId={profileId} onSwitch={pickProfile} />
           <main>
-            <Hero onPlay={() => setPlaying(true)} onResume={() => {}} profileId="amritpal" />
-            {PHASE_ORDER.length === ALL_SECTIONS && <ContinueWatching order={PHASE_ORDER} />}
-            <Scene id="about">
-              <About />
-            </Scene>
-            <Scene id="journey">
-              <Seasons />
-            </Scene>
-            <Scene id="originals" className="!py-0 sm:!py-0">
-              <Originals onOpen={setProject} />
-            </Scene>
-            <Scene id="picks">
-              <TopPicks />
-            </Scene>
-            <Scene id="skills">
-              <Skills />
-            </Scene>
-            <Scene id="moments">
-              <Achievements />
-            </Scene>
-            <Scene id="story">
-              <ResumeSection onView={() => setResumeOpen(true)} />
-            </Scene>
-            <FinalCTA onReplay={() => { setProject(null); setResumeOpen(false); setStage('opening'); }} />
+            <Hero key={`hero-${profileId}`} onPlay={() => setPlaying(true)} onResume={() => setResumeOpen(true)} profileId={profileId} />
+            <ContinueWatching order={order} />
+            {order.map((id) => (
+              <Scene key={id} id={id} className={id === 'originals' ? '!py-0 sm:!py-0' : ''}>
+                {sections[id]}
+              </Scene>
+            ))}
+            <FinalCTA onReplay={() => { setProject(null); setResumeOpen(false); setPlaying(false); setStage('opening'); }} />
           </main>
+        </motion.div>
+      )}
+
+      {toast && (
+        <motion.div
+          role="status"
+          className="glass fixed bottom-6 left-1/2 z-[150] w-[min(92vw,420px)] -translate-x-1/2 rounded-xl px-5 py-3 text-center text-sm text-bone"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+        >
+          {toast}
         </motion.div>
       )}
 

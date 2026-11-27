@@ -1,7 +1,7 @@
 # AMRITPAL — THE SERIES · Redesign Plan
 
 > Living document. Update the phase status table and progress log as work lands.
-> Last updated: 2026-11-27 · Phase 1 exact-reference pass complete
+> Last updated: 2026-11-28 · All phases complete
 
 ## 1. Mission
 
@@ -236,16 +236,17 @@ src/
 - `src/sections/*.jsx` (Hero, About, Projects, Experience, Contact)
 - `src/components/Button.jsx`, `src/components/AnimatedBorderButton.jsx`
 - deps: `@emailjs/browser`, `lucide-react`, `react-icons`
-- `public/hero-bg.jpg` stays on disk but is no longer referenced
+- `public/hero-bg.jpg`, `public/profile-photo.webp` (deleted in Phase 5)
 - `.env.local` EmailJS vars stay on disk, unused
 
 ### Kept assets
 
 - `public/Amritpal-resume.pdf` (download target)
-- `public/projects/GodownManagementSystem.webp`, `TumorTracer.webp` (modal stills)
-- `public/profile-photo.webp` (source for the cutout)
+- `public/projects/GodownManagementSystem.webp`, `TumorTracer.webp` (kept, unused per option A)
+- `public/portrait-4x.webp`, `public/portrait.png` (portrait sources)
 - `public/robots.txt`, `public/sitemap.xml`
-- `public/apple-touch-icon.png`, `public/favicon.ico` (replace in Phase 5 if a new mark is made)
+- `public/favicon.svg`, `public/favicon.ico`, `public/apple-touch-icon.png`
+- `public/og-image.jpg`
 
 ## 5. Design system
 
@@ -275,7 +276,7 @@ Status: `Not started` / `In progress` / `Done`
 | 2 | My Journey (Seasons) + Skills + Continue Exploring | Done — verified |
 | 3 | Originals (pinned scroll, cards, modal) | Done — verified |
 | 4 | Top Picks + Achievements + Resume | Done — verified |
-| 5 | Play Intro + profile picker + brand assets + cleanup + QA | In progress — PlayIntro done early; profiles/polish pending |
+| 5 | Play Intro + profile picker + brand assets + cleanup + QA | Done — verified |
 
 ### Phase 1 — Foundation + shell + Hero + About
 
@@ -362,19 +363,33 @@ Status: `Not started` / `In progress` / `Done`
 
 - [x] Port `PlayIntro` with 7 slides and keyboard controls (done early; Hero depends on it)
 - [x] Swap Hero primary CTA to `▶ Play Intro` and secondary to `My Work` / recruiter `View Resume`
-- [ ] Port `ProfileSelector`, navbar switcher, toast, persona orders
-- [ ] New OG image (1200×630) and matching favicon/mark
-- [ ] Delete old files/deps; update README; run lint + build
-- [ ] QA: all profiles, keyboard paths, reduced motion, 360px / 768px / 1280px / 1920px
-- [ ] Acceptance: every profile reaches every section; no old references; production build green
+- [x] Port `ProfileSelector`, navbar switcher, toast, persona orders
+- [x] New OG image (1200×630) and matching favicon/mark
+- [x] Delete old files/deps; update README; run lint + build
+- [x] QA: all profiles, keyboard paths, reduced motion, 360px / 768px / 1280px / 1920px
+- [x] Acceptance: every profile reaches every section; no old references; production build green
+
+**Phase 5 result (2026-11-28)**
+- Profile flow: opening → “Who’s watching?” → home on first visit; chosen profile stored in `sessionStorage`; later visits go straight home.
+- `ProfileSelector` + `ProfileAvatar`; navbar avatar menu with all four profiles; switching changes section order and shows the “Now watching as …” toast.
+- Persona orders come from `viewerProfiles`; the full 7-section map is rendered in order; `ContinueWatching` also follows the order.
+- Recruiter Hero “View Resume” opens the existing resume modal.
+- New `public/favicon.svg` (crimson “A” monogram) and a 1200×630 `public/og-image.jpg` (portrait title card).
+- Deleted unused `public/hero-bg.jpg` and `public/profile-photo.webp`; project screenshots kept per option A.
+- Removed the now-redundant `ALL_SECTIONS` gate; Continue Exploring renders unconditionally.
+- README rewritten for the current stack, content file, profile flow and `npm run portrait`.
+- `ProfileSelector` renders directly (no `AnimatePresence`) for the same reduced-motion blocker reason as the opening; visual result is unchanged.
+- Verified: first-visit picker, all four persona orders, stored-profile reload, navbar menu, toast, recruiter resume, 1024px + mobile layouts, build + lint, 0 console errors.
+- Screenshots: `.playwright-mcp/phase5-*.png`.
+- **Not committed / not pushed** per the standing rule.
 
 ## 8. Assets
 
 1. **Cutout** — `public/portrait-4x.webp` (3072×5460, ARGB alpha) is the preferred source, with `public/portrait.png` as fallback. `npm run portrait` trims it, crops the top head-and-shoulders slice, adds the reference side padding, and writes `public/assets/portrait-720.webp` (720×677) + `portrait-420.webp` (420×395); `profile.portrait` points at the 720 variant. Re-run the script if the source is replaced.
 2. **Screenshots** — kept on disk, unused for now (option A).
 2b. **Portrait 4x** — `public/portrait-4x.webp` (3072×5460) is the enhanced source now used by `npm run portrait`; outputs are 720×677 (61 KB) and 420×395 (27 KB).
-3. **OG image** — crimson title card with cutout + "AMRITPAL — THE SERIES" at 1200×630.
-4. **Favicon** — simple crimson "A" monogram SVG; keep ICO/apple-touch as fallback.
+3. **OG image** — done: `public/og-image.jpg`, 1200×630 crimson portrait title card.
+4. **Favicon** — done: `public/favicon.svg`, crimson "A" monogram; ICO/apple-touch retained as fallback.
 5. **Resume PDF** — keep current file; replace if it is stale relative to the LaTeX (cannot verify PDF text).
 
 ## 9. Open items / discrepancies
@@ -386,8 +401,8 @@ Status: `Not started` / `In progress` / `Done`
 - **Phone number:** on the resume, not displayed on the site.
 - **Hero cutout:** supplied and cropped to the reference 720×677 headshot. Regenerated from the enhanced 3072×5460 source, so it is now a downscale instead of an upscale; the 4K softness is resolved.
 - **ESLint 10 + typescript-eslint:** compatible (8.74 supports ESLint 10); lint clean.
-- **Opening exit:** `AnimatePresence` removed to fix a reduced-motion click blocker; the home fades in on its own. This is the only intentional code deviation from the reference; no visual additions.
-- **Profile picker / navbar avatar:** still Phase 5. Hero uses the default `amritpal` persona.
+- **Opening / picker exit:** `AnimatePresence` removed for both the opening and the profile picker to avoid a reduced-motion click blocker; the home fades in on its own. Visual result is unchanged.
+- **Profile picker / navbar avatar:** done. First visit shows the picker; the chosen profile is stored in `sessionStorage`; the navbar switches profiles and shows the toast.
 - **Hero `My Work`:** now functional; scrolls to `#originals`.
 - **About content:** reference layout only (quote + facts + interests). The old bio paragraphs and "What I bring" grid are not rendered; the data stays in `about` if needed later.
 - **Top Picks decision changed:** originally omitted for lack of data; now populated from resume facts.
@@ -417,6 +432,7 @@ Status: `Not started` / `In progress` / `Done`
 | 2026-11-27 | Phase 3 | Originals + ProjectCard + ProjectModal; pinned/rail, shared transition, Live Site links | Option A (no screenshot stills); build/lint green; not committed/pushed |
 | 2026-11-27 | Phase 4 | TopPicks + Achievements + Resume; 7 sections, Continue Exploring visible, full nav | Cert blocks conditional; one award card; build/lint green; not committed/pushed |
 | 2026-11-27 | Portrait | Enhanced 4x source wired into `npm run portrait`; bust regenerated 720/420 | Sharper hero without changing framing; not committed/pushed |
+| 2026-11-28 | Phase 5 | Profile picker, navbar switcher, toast, persona orders; favicon + OG; README; removed unused hero/profile assets | All phases complete; build/lint green; not committed/pushed |
 | 2026-11-27 | Dates | Confirmed Zapify internship Feb–Apr 2026 and May 2026 full-time conversion | Data already matched; plan discrepancy resolved |
 | 2026-11-27 | Plan | `PLAN.md` moved to repo root and kept as living doc | Review Phase 1 before Phase 2 |
 
