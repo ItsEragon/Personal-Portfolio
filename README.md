@@ -1,46 +1,71 @@
-# Amritpal Singh — Portfolio
+# AMRITPAL — THE SERIES
 
-Personal portfolio site built with React 19, Vite and Tailwind CSS v4.
+A cinematic, streaming-inspired portfolio for **Amritpal Singh**.
+Every section is an episode, every project is an Original, and the site plays like a series.
 
 **Live:** https://amritps.vercel.app/
 
 ## Stack
 
 - React 19 + Vite 8
-- Tailwind CSS v4 (`@theme` tokens in `src/index.css`)
-- lucide-react / react-icons
-- EmailJS for the contact form
+- TypeScript
+- Tailwind CSS 4 (`@theme` tokens in `src/index.css`)
+- Framer Motion 11 + Lenis smooth scroll
+- Sharp for the portrait pipeline (dev only)
 
-## Scripts
+## Run it
 
 ```bash
 npm install
 npm run dev      # local dev server
-npm run build    # production build to dist/
-npm run preview  # preview the production build
+npm run build    # tsc + production build
 npm run lint     # eslint
+npm run preview  # preview the production build
 ```
 
-## Environment variables
+## Content
 
-Create `.env.local` (gitignored):
+All content lives in **`src/data/portfolio.ts`** — profile, education, experience, projects, skills, seasons, achievements, top picks and the four viewer profiles. The components read from that file.
 
+Contact actions are limited to email, LinkedIn and GitHub. There is no contact form and no EmailJS dependency.
+
+## Portrait
+
+The transparent source is `assets-src/portrait-4x.webp` (fallback: `assets-src/portrait.png`). Regenerate the responsive bust after replacing it:
+
+```bash
+npm run portrait
 ```
-VITE_EMAILJS_SERVICE_ID=
-VITE_EMAILJS_TEMPLATE_ID=
-VITE_EMAILJS_PUBLIC_KEY=
-```
 
-The contact form fails gracefully with a friendly message if these are missing. Note that `VITE_` variables are inlined into the client bundle — the EmailJS public key is meant to be public.
+This writes `public/assets/portrait-720.webp` and `portrait-420.webp` using the reference head-and-shoulders framing.
+
+Icons: `npm run favicon` rebuilds `public/favicon.ico` (16–256px, PNG-frame) from `public/favicon.svg`.
 
 ## Structure
 
 ```
+assets-src/              portrait sources (not served)
 src/
-  layout/     Navbar, Footer
-  sections/   Hero, About, Projects, Experience, Contact
-  components/ Button, AnimatedBorderButton
+  App.tsx              opening → Who's watching? → home; overlays; toast
+  data/portfolio.ts    single source of truth
+  hooks/               Lenis scroll, media queries, watch progress
+  components/          Opening, ProfileSelector, Navbar, Hero, ContinueWatching,
+                       About, Seasons/EpisodeCard, Originals/ProjectCard/ProjectModal,
+                       TopPicks, Skills, Achievements, ResumeViewer/ResumeModal,
+                       PlayIntro, FinalCTA, fx, Poster, Rail, Scene, CustomCursor
 public/
-  projects/   project screenshots
-  og-image.jpg  1200x630 social preview
+  assets/portrait-*.webp
+  favicon.svg
+  favicon.ico
+  apple-touch-icon.png
+  og-image.jpg
+  Amritpal-resume.pdf
+scripts/build-portrait.mjs
+scripts/build-favicon.mjs
 ```
+
+## Notes
+
+- The viewer profiles (Amritpal / Recruiter / Developer / Creative) change section order only.
+- The Hero “Play Intro” highlights facts from the resume.
+- Reduced motion is respected: the opening exits immediately, the custom cursor/particles/pinned scroll are disabled.

@@ -2,30 +2,33 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
-    <title>Amritpal Singh — Full Stack Developer</title>
+    <title>Amritpal Singh - Full Stack Developer</title>
     <meta
       name="description"
-      content="Amritpal Singh is a Full Stack Developer building fast, scalable web applications with React, Svelte, Node.js and AWS."
+      content="Amritpal Singh is a Full Stack Developer building fast, scalable web applications with Svelte, React, Payload CMS, Node.js and AWS."
     />
     <meta name="author" content="Amritpal Singh" />
-    <meta name="theme-color" content="#0f1418" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#07070a" />
     <link rel="canonical" href="https://amritps.vercel.app/" />
 
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20261128b" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico?v=20261128b" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=20261128b" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Amritpal Singh" />
     <meta property="og:url" content="https://amritps.vercel.app/" />
-    <meta property="og:title" content="Amritpal Singh — Full Stack Developer" />
+    <meta property="og:title" content="Amritpal Singh - Full Stack Developer" />
     <meta
       property="og:description"
-      content="Full Stack Developer building fast, scalable web applications with React, Svelte, Node.js and AWS."
+      content="Full Stack Developer building client websites and business applications with Svelte, React, Payload CMS and AWS."
     />
     <meta property="og:image" content="https://amritps.vercel.app/og-image.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Amritpal Singh — Full Stack Developer" />
@@ -33,15 +36,85 @@
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Amritpal Singh — Full Stack Developer" />
+    <meta name="twitter:title" content="Amritpal Singh - Full Stack Developer" />
     <meta
       name="twitter:description"
-      content="Full Stack Developer building fast, scalable web applications with React, Svelte, Node.js and AWS."
+      content="Full Stack Developer building client websites and business applications with Svelte, React, Payload CMS and AWS."
     />
     <meta name="twitter:image" content="https://amritps.vercel.app/og-image.jpg" />
+    <meta name="twitter:image:alt" content="Amritpal Singh — Full Stack Developer" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Person",
+            "@id": "https://amritps.vercel.app/#person",
+            "name": "Amritpal Singh",
+            "jobTitle": "Full Stack Developer",
+            "description": "Full Stack Developer building client websites and business applications with Svelte, React, Payload CMS and AWS.",
+            "url": "https://amritps.vercel.app/",
+            "image": "https://amritps.vercel.app/assets/portrait-720.webp",
+            "email": "amritps2001@gmail.com",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Siliguri",
+              "addressRegion": "West Bengal",
+              "addressCountry": "IN"
+            },
+            "sameAs": [
+              "https://github.com/ItsEragon",
+              "https://www.linkedin.com/in/itseragon"
+            ],
+            "alumniOf": {
+              "@type": "CollegeOrUniversity",
+              "name": "University of North Bengal"
+            },
+            "worksFor": {
+              "@type": "Organization",
+              "name": "Zapify Australia"
+            },
+            "knowsAbout": [
+              "Svelte",
+              "React.js",
+              "Next.js",
+              "JavaScript",
+              "Tailwind CSS",
+              "Node.js",
+              "Express.js",
+              "Payload CMS",
+              "MongoDB",
+              "AWS",
+              "SST",
+              "Terraform",
+              "Shopify Hydrogen"
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://amritps.vercel.app/#website",
+            "url": "https://amritps.vercel.app/",
+            "name": "AMRITPAL — THE SERIES",
+            "description": "A cinematic portfolio for Amritpal Singh, Full Stack Developer.",
+            "inLanguage": "en",
+            "author": { "@id": "https://amritps.vercel.app/#person" }
+          }
+        ]
+      }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preload" as="image" href="/assets/portrait-720.webp" type="image/webp" />
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    <noscript>Amritpal Singh — Full Stack Developer. Please enable JavaScript to watch the series.</noscript>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
