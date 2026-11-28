@@ -13,7 +13,7 @@ export function ProfileAvatar({ id, size = 'lg' }: { id: ProfileId; size?: 'sm' 
           src={profile.portrait.src}
           srcSet={profile.portrait.srcSet}
           alt=""
-          className="absolute inset-x-0 bottom-0 mx-auto h-[115%] w-auto max-w-none -translate-x-[3%] object-cover object-top"
+          className="absolute left-1/2 top-[4%] h-[150%] w-auto max-w-none -translate-x-1/2 object-cover object-top"
         />
       </span>
     );

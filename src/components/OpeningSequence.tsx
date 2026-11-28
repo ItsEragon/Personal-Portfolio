@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { profile } from '../data/portfolio';
-import { useReducedMotionPref } from '../hooks/useMedia';
+import { useMedia, useReducedMotionPref } from '../hooks/useMedia';
 import { EASE, Magnetic } from './fx';
 
 /**
@@ -19,6 +19,7 @@ const TIMELINE = [
 
 export default function OpeningSequence({ onDone }: { onDone: () => void }) {
   const reduced = useReducedMotionPref();
+  const short = useMedia('(max-height: 480px)');
   const [beat, setBeat] = useState(reduced ? 6 : 0);
 
   useEffect(() => {
@@ -101,7 +102,7 @@ export default function OpeningSequence({ onDone }: { onDone: () => void }) {
       <div className="absolute inset-0 z-10 flex flex-col items-center justify-center px-4 text-center">
         <motion.h1
           className="font-display leading-[0.82] text-bone drop-shadow-[0_8px_40px_rgba(0,0,0,0.8)]"
-          style={{ fontSize: 'clamp(4.6rem, 20vw, 15rem)' }}
+          style={{ fontSize: short ? 'clamp(2.75rem, 20vw, 4.6rem)' : 'clamp(4.6rem, 20vw, 15rem)' }}
           initial={{ opacity: 0, scale: 1.3, filter: 'blur(20px)', letterSpacing: '0.5em' }}
           animate={beat >= 2 ? { opacity: 1, scale: 1, filter: 'blur(0px)', letterSpacing: '0.04em', y: beat >= 4 ? '-30vh' : 0 } : {}}
           transition={{ duration: 1.3, ease: EASE }}
@@ -146,7 +147,7 @@ export default function OpeningSequence({ onDone }: { onDone: () => void }) {
       <button
         type="button"
         onClick={onDone}
-        className="absolute right-4 top-[calc(7vh+12px)] z-40 rounded-full border border-white/20 px-4 py-2 font-sans text-[11px] font-semibold tracking-[0.2em] text-mist transition hover:border-white/60 hover:text-bone"
+        className="absolute right-4 top-4 z-40 rounded-full border border-white/20 px-4 py-2 font-sans text-[11px] font-semibold tracking-[0.2em] text-mist transition hover:border-white/60 hover:text-bone"
       >
         SKIP INTRO
       </button>
