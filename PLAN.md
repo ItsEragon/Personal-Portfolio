@@ -387,6 +387,12 @@ Status: `Not started` / `In progress` / `Done`
 - Build + lint green; 0 console errors.
 - **Not committed / not pushed.**
 
+**Bug fixes (2026-11-28)**
+- `ProfileAvatar`: crop changed from bottom-anchored `h-[115%]` (showed mostly shirt, clipped turban) to top-anchored `h-[150%]` at `top-[4%]`, centred with `-translate-x-1/2`. Face now fills the 96/128/144px picker tile and the 32px navbar avatar.
+- `OpeningSequence`: SKIP INTRO anchored at `top-4 right-4` — equal 16px from the top and right edges, as originally — and still clear of the title on every viewport. On `max-height: 480px` the title font caps at `4.6rem`, which also stops it clipping off the top in landscape.
+- Verified no rect intersection at 320×568, 360×640, 390×844, 667×375, 740×360, 844×390, 768×1024, 1440×900; desktop type unchanged (240px at 1440).
+- Build + lint green; 0 console errors. **Not committed / not pushed.**
+
 ## 8. Assets
 
 1. **Cutout** — `assets-src/portrait-4x.webp` (3072×5460, ARGB alpha) is the preferred source, with `assets-src/portrait.png` as fallback. `npm run portrait` trims it, crops the top head-and-shoulders slice, adds the reference side padding, and writes `public/assets/portrait-720.webp` (720×677) + `portrait-420.webp` (420×395); `profile.portrait` points at the 720 variant. Re-run the script if the source is replaced.
@@ -440,6 +446,7 @@ Status: `Not started` / `In progress` / `Done`
 | 2026-11-28 | SEO | Page/OG/Twitter title set to Full Stack Developer, image type/alt, robots meta, Person + WebSite JSON-LD, sitemap lastmod, new apple-touch-icon | Node-validated JSON-LD; build/lint green |
 | 2026-11-28 | Favicon | `favicon.ico` regenerated from `favicon.svg` at 16–256px; compressed to PNG-frame ICO (8.5 KB); links cache-busted with `?v=20261128b` | Pushed |
 | 2026-11-28 | Final pass | Portrait sources moved to `assets-src/`; project screenshots + unused About/availability data removed; Originals mobile overflow fixed | Verified: 7 widths, 4 profiles, reduced motion, build/lint, 0 errors; not committed/pushed |
+| 2026-11-28 | Bug fixes | Profile avatar recropped to the face; SKIP INTRO moved into the letterbox bar + short-screen title cap | No overlap at 8 viewports; build/lint green; not committed/pushed |
 | 2026-11-27 | Dates | Confirmed Zapify internship Feb–Apr 2026 and May 2026 full-time conversion | Data already matched; plan discrepancy resolved |
 | 2026-11-27 | Plan | `PLAN.md` moved to repo root and kept as living doc | Review Phase 1 before Phase 2 |
 
